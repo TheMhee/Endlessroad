@@ -9,6 +9,7 @@
             colors = ['red','blue','purple','green']
             key = {};
             lane = [0,0,0,0];
+            sc = 0;
             console.log(key);
         }
 
@@ -25,12 +26,12 @@
                 var x = Math.floor(Math.random() * 12) 
                 var c = Math.floor(Math.random() * 4)
                 enemystatus[x-1] = 1;
-            },400)
+            },600)
             var i;
             setInterval(function(){
                 for(i=0;i<12;i++){
                     if(enemystatus[i] == 1){
-                        enemytop[i] += 1;
+                        enemytop[i] += 0.8;
                     }
                     if(enemytop[i] > 100){
                         enemytop[i] = -15;
@@ -193,7 +194,13 @@
 
                 }
             },10)
-
+        function time(){
+            setInterval(function(){
+                sc += 0.01;
+                score.innerText = "score : "+sc.toFixed(2);
+            },10)
+        }
+        time()
         start()
         runroad();
         game();

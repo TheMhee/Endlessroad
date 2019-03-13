@@ -21,16 +21,21 @@ score{
     width: 15vw;
     height:15vh;
     background: black;
+    border: 5px solid hsl(240 40% 50%);
     font-size: 1vw;
+}
+score:nth-child(1){
+    border-color: transparent;
 }
 score:nth-child(2){
     top:15vh;
     height:70vh;
-    background: hsl(120 100% 10%);
+    background: hsl(240 100% 20%);
 }
 score:nth-child(3){
-    top:85vh;
-    height:25vh;
+    border-color: transparent;
+    top:calc(85vh + 10px);
+    height:15vh;
 }
 car, enemy{
     position:absolute;
@@ -70,4 +75,7 @@ enemy:nth-child(4n-1){
 enemy:nth-child(4n){
     top:-15vh;
     left:20vw;
+}
+p{
+    color: white;
 }
