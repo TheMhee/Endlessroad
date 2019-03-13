@@ -1,0 +1,52 @@
+body{
+    margin:0;
+}
+road{
+    display:block;
+    background-size:100%;
+    background-image: url('img/bg-body.jpeg');
+    background-repeat: repeat-y;
+    height:100vh;
+    width:25%;
+    position: fixed;
+
+}
+car, enemy{
+    position:absolute;
+    display:inline-block;
+    width:4vw;
+    height:12vh;
+    background:red;
+}
+car{
+    background:white;
+}
+
+#game{
+    width:40%;
+    height: 100vh;
+    background:grey;
+    display: block;
+    margin:auto;
+}
+#player{
+    background:pink;
+    top:80vh;
+    left:10vw;
+}
+enemy:nth-child(4n-3){
+    top:-15vh;
+    left:1vw;
+}
+enemy:nth-child(4n-2){
+    top:-15vh;
+    left:7.25vw;
+}
+enemy:nth-child(4n-1){
+    top:-15vh;
+    left:13.5vw;
+}
+enemy:nth-child(4n){
+    top:-15vh;
+    left:20vw;
+}
