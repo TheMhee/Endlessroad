@@ -3,37 +3,42 @@
             car = window.getComputedStyle(document.querySelector('#player'));
             carx = 80;
             cary = 10;
-            enemytop = [-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15];
-            enemyleft = [1,7.25,13.5,20,1,7.25,13.5,20,1,7.25,13.5,20];
-            enemystatus = [0,0,0,0,0,0,0,0,0,0,0,0];
+            enemytop = [-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15];
+            enemyleft = [1,7.25,13.5,20,1,7.25,13.5,20,1,7.25,13.5,20,1,7.25,13.5,20];
+            enemystatus = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
             colors = ['red','blue','purple','green']
             key = {};
             lane = [0,0,0,0];
             sc = 0;
-            console.log(key);
         }
 
         function runroad(){
         var roadx = 0;
         setInterval(function(){
             roadx+=1;
-            run.style.backgroundPosition = '0px '+roadx+'vh';}, 1);
-            if (roadx>=100) {roadx=1}
+            run.style.backgroundPosition = '0px '+roadx+'vh';
+            if (roadx>=110) {roadx=0;}
+            console.log(roadx)
+            }, 1);
         }
-
+        before = -1
+        x = -1
         function game(){
             setInterval(function(){
-                var x = Math.floor(Math.random() * 12) 
+                while(before == x)
+                    x = Math.floor(Math.random() * 12)
+                before = x;
                 var c = Math.floor(Math.random() * 4)
-                enemystatus[x-1] = 1;
-            },600)
+                enemystatus[x] = 1;
+            },400)
+
             var i;
             setInterval(function(){
-                for(i=0;i<12;i++){
+                for(i=0;i<16;i++){
                     if(enemystatus[i] == 1){
-                        enemytop[i] += 0.8;
+                        enemytop[i] += 1.3;
                     }
-                    if(enemytop[i] > 100){
+                    if(enemytop[i] >= 100){
                         enemytop[i] = -15;
                         enemystatus[i] = 0;
                     }
@@ -110,7 +115,7 @@
         function update(){
             player.style.top = carx+'vh';
             player.style.left = cary+'vw';
-            for(i=0;i<12;i++)
+            for(i=0;i<16;i++)
                 document.querySelector('enemy:nth-child('+(i+1)+')').style.top = enemytop[i]+"vh";
             ustat = 1
         }
@@ -166,26 +171,26 @@
                 }
                 ustat = 0;
             }
-                for(i=0;i<12;i++){
-                    if(i == 0 || i == 4 || i == 8)
+                for(i=0;i<16;i++){
+                    if(i == 0 || i == 4 || i == 8 || i == 12)
                         if(lane[0]==1&&enemytop[i]+12 > carx&&enemytop[i] < carx+12&&enemyleft[i]+0.2<cary+4&&enemyleft[i]+4 > cary+0.2){
                             start();
                             alert("LOL");
                             update();
                         }
-                    if(i == 1 || i == 5 || i == 9)
+                    if(i == 1 || i == 5 || i == 9 || i == 13)
                         if(lane[1]==1&&enemytop[i]+12 > carx&&enemytop[i] < carx+12&&enemyleft[i]+0.2<cary+4&&enemyleft[i]+4 > cary+0.2){
                             start();
                             alert("LOL");
                             update();
                         }
-                    if(i == 2 || i == 6 || i == 10)
+                    if(i == 2 || i == 6 || i == 10 || i == 14)
                         if(lane[2]==1&&enemytop[i]+12 > carx&&enemytop[i] < carx+12&&enemyleft[i]+0.2<cary+4&&enemyleft[i]+4 > cary+0.2){
                             start();
                             alert("LOL");
                             update();
                         }
-                    if(i == 3 || i == 7 || i == 11)
+                    if(i == 3 || i == 7 || i == 11 || i == 15)
                         if(lane[3]==1&&enemytop[i]+12 > carx&&enemytop[i] < carx+12&&enemyleft[i]+0.2<cary+4&&enemyleft[i]+4 > cary+0.2){
                             start();
                             alert("LOL");
@@ -200,6 +205,9 @@
                 score.innerText = "score : "+sc.toFixed(2);
             },10)
         }
+        /*setInterval(function(){
+                console.log(enemystatus);
+            },1000)*/
         time()
         start()
         runroad();
