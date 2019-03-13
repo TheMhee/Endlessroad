@@ -1,5 +1,6 @@
 body{
     margin:0;
+    background: grey;
 }
 road{
     display:block;
@@ -7,9 +8,30 @@ road{
     background-image: url('img/bg-body.jpeg');
     background-repeat: repeat-y;
     height:100vh;
-    width:25%;
+    width:25vw;
     position: fixed;
+    float: left;
 
+}
+score{
+    position: fixed;
+    left:calc(40% + 15vw);
+    display: block;
+    text-align: center;
+    width: 15vw;
+    height:25vh;
+    background: red;
+    font-size: 1vw;
+}
+score:nth-child(2){
+    top:25vh;
+    height:50vh;
+    background: black;
+}
+score:nth-child(3){
+    top:75vh;
+    height:25vh;
+    background: red;
 }
 car, enemy{
     position:absolute;
