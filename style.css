@@ -47,8 +47,7 @@ car, enemy{
 enemy{
     background: red;
 }
-car{
-}
+
 
 
 #game{
@@ -61,6 +60,7 @@ car{
 #player{
     background-image: url('eiei.png');
     background-repeat: no-repeat;
+    filter: grayscale(20%);
     position:absolute;
     top:80vh;
     left:10vw;
@@ -93,6 +93,14 @@ p{
 p:nth-child(1){
     position: absolute;
     left: 41%
+}
+slow{
+    position: absolute;
+    display: block;
+    width:14vw;
+    height:1vw;
+    background:red;
+    left: 0.5vw;
 }
 @font-face {
     font-family: 'digital';

@@ -3,6 +3,11 @@
             car = window.getComputedStyle(document.querySelector('#player'));
             carx = 80;
             cary = 10;
+            speedcarx = 0.35
+            speedcary = 0.15
+            speedroad = 1
+            speedenemy = 0.5
+            speedspawn = 800
             enemytop = [-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15];
             enemyleft = [1,7.25,13.5,20,1,7.25,13.5,20,1,7.25,13.5,20,1,7.25,13.5,20];
             enemystatus = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -10,15 +15,15 @@
             key = {};
             lane = [0,0,0,0];
             sc = 0;
+            brainbreak = 0;
         }
 
         function runroad(){
         var roadx = 0;
         setInterval(function(){
-            roadx+=1;
+            roadx+=speedroad;
             run.style.backgroundPosition = '0px '+roadx+'vh';
             if (roadx>=110) {roadx=0;}
-            console.log(roadx)
             }, 1);
         }
         before = -1
@@ -30,13 +35,13 @@
                 before = x;
                 var c = Math.floor(Math.random() * 4)
                 enemystatus[x] = 1;
-            },800)
+            },speedspawn)
 
             var i;
             setInterval(function(){
                 for(i=0;i<16;i++){
                     if(enemystatus[i] == 1){
-                        enemytop[i] += 0.5;
+                        enemytop[i] += speedenemy;
                     }
                     if(enemytop[i] >= 100){
                         enemytop[i] = -15;
@@ -62,6 +67,9 @@
             else if(a == 'ArrowLeft'|| a == 'KeyA'){
                 key['Left'] = false;
             }
+            else if(a == 'Space'){
+                key['Space'] = false;
+            }
         }
         //รับข้อมูลเมื่อกดลูกศร
         window.onkeydown = function(event) { 
@@ -78,6 +86,9 @@
             else if(a == 'ArrowLeft'|| a == 'KeyA'){
                 key['Left'] = true;
             }
+            else if(a == 'Space'){
+                key['Space'] = true;
+            }
 
         }
         //เช็ค Inputการเครื่องไหวตลอดเวลา พร้อมอัพเดท
@@ -87,28 +98,28 @@
             if(carx<87&&carx>0)carx+=0.1;
 
             if(key['Up']&&carx>1){
-                carx-=0.3;
+                carx-=speedcarx;
                 if((key['Right'])&&cary<20.5){
-                cary+=0.15;
+                cary+=speedcary;
                 }
                 else if(key['Left']&&cary>0.5){
-                cary-=0.15;
+                cary-=speedcary;
                 }
             }
             else if(key['Down']&&carx<87){
-                carx+=0.5;
+                carx+=speedcarx;
                 if((key['Right'])&&cary<20.5){
-                cary+=0.15;
+                cary+=speedcary;
                 }
                 else if(key['Left']&&cary>0.5){
-                cary-=0.15;
+                cary-=speedcary;
                 }
             }
             else if((key['Right'])&&cary<20.5){
-                cary+=0.15;
+                cary+=speedcary;
             }
             else if(key['Left']&&cary>0.5){
-                cary-=0.15;
+                cary-=speedcary;
             }
         }
 
@@ -199,6 +210,26 @@
 
                 }
             },10)
+
+        setInterval(function(){
+                if(key['Space']==true && brainbreak == 0){
+                    speedcarx *= 0.5
+                    speedcary *= 0.5
+                    speedroad *= 0.5
+                    speedenemy *= 0.5
+                    speedspawn /= 0.5
+                    brainbreak = 1
+                }
+                else if(key['Space']==false && brainbreak == 1){
+                    speedcarx /= 0.5
+                    speedcary /= 0.5
+                    speedroad /= 0.5
+                    speedenemy /= 0.5
+                    speedspawn *= 0.5
+                    brainbreak = 0
+                }
+            },10)
+
         function time(){
             setInterval(function(){
                 sc += 0.01;
