@@ -1,5 +1,6 @@
 
         function start(){
+            run.style.filter = 'grayscale(0)'
             car = window.getComputedStyle(document.querySelector('#player'));
             carx = 80;
             cary = 10;
@@ -29,14 +30,7 @@
         before = -1
         x = -1
         function game(){
-            setInterval(function(){
-                while(before == x)
-                    x = Math.floor(Math.random() * 12)
-                before = x;
-                var c = Math.floor(Math.random() * 4)
-                enemystatus[x] = 1;
-            },speedspawn)
-
+            sp = setInterval(spawn, speedspawn);
             var i;
             setInterval(function(){
                 for(i=0;i<16;i++){
@@ -49,8 +43,20 @@
                     }
                 }
             },10)
-
         }
+
+        function spawn() {
+            while(before == x)
+                x = Math.floor(Math.random() * 12)
+                before = x;
+                var c = Math.floor(Math.random() * 4)
+                enemystatus[x] = 1;
+        }
+
+        function stopspawn() {
+            clearInterval(sp);
+        }
+        
 
         //รับข้อมูลเมื่อปล่อยลูกศร
         window.onkeyup = function(event) { 
@@ -122,6 +128,38 @@
                 cary-=speedcary;
             }
         }
+
+        setInterval(function(){
+                if(key['Space']==true && brainbreak == 0){
+
+                    run.style.filter = 'grayscale(0.8)'
+                    run.style.transition = 'filter 0.5s'
+
+                    speedcarx *= 0.5;
+                    speedcary *= 0.5;
+                    speedroad *= 0.5;
+                    speedenemy *= 0.5;
+                    slowspawn = speedspawn*2;
+                    if(brainbreak == 0)
+                        stopspawn();
+                    brainbreak = 1;
+                    sp = setInterval(spawn, slowspawn);
+                }
+                else if(key['Space']==false && brainbreak == 1){
+
+                    run.style.filter = 'grayscale(0)'
+                    run.style.transition = 'filter 0.5s'
+
+                    speedcarx /= 0.5;
+                    speedcary /= 0.5;
+                    speedroad /= 0.5;
+                    speedenemy /= 0.5;
+                    if(brainbreak == 1)
+                        stopspawn();
+                    brainbreak = 0;
+                    sp = setInterval(spawn, speedspawn);
+                }
+            },10)
 
         function update(){
             player.style.top = carx+'vh';
@@ -211,25 +249,6 @@
                 }
             },10)
 
-        setInterval(function(){
-                if(key['Space']==true && brainbreak == 0){
-                    speedcarx *= 0.5
-                    speedcary *= 0.5
-                    speedroad *= 0.5
-                    speedenemy *= 0.5
-                    speedspawn /= 0.5
-                    brainbreak = 1
-                }
-                else if(key['Space']==false && brainbreak == 1){
-                    speedcarx /= 0.5
-                    speedcary /= 0.5
-                    speedroad /= 0.5
-                    speedenemy /= 0.5
-                    speedspawn *= 0.5
-                    brainbreak = 0
-                }
-            },10)
-
         function time(){
             setInterval(function(){
                 sc += 0.01;
@@ -239,8 +258,8 @@
             },10)
         }
         /*setInterval(function(){
-                console.log(enemystatus);
-            },1000)*/
+                console.log(speedspawn);
+            },10)*/
         time()
         start()
         runroad();
