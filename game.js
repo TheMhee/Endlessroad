@@ -30,13 +30,13 @@
                 before = x;
                 var c = Math.floor(Math.random() * 4)
                 enemystatus[x] = 1;
-            },400)
+            },800)
 
             var i;
             setInterval(function(){
                 for(i=0;i<16;i++){
                     if(enemystatus[i] == 1){
-                        enemytop[i] += 1.3;
+                        enemytop[i] += 0.5;
                     }
                     if(enemytop[i] >= 100){
                         enemytop[i] = -15;
@@ -87,28 +87,28 @@
             if(carx<87&&carx>0)carx+=0.1;
 
             if(key['Up']&&carx>1){
-                carx-=0.5;
+                carx-=0.3;
                 if((key['Right'])&&cary<20.5){
-                cary+=0.22;
+                cary+=0.15;
                 }
                 else if(key['Left']&&cary>0.5){
-                cary-=0.22;
+                cary-=0.15;
                 }
             }
             else if(key['Down']&&carx<87){
-                carx+=0.8;
+                carx+=0.5;
                 if((key['Right'])&&cary<20.5){
-                cary+=0.22;
+                cary+=0.15;
                 }
                 else if(key['Left']&&cary>0.5){
-                cary-=0.22;
+                cary-=0.15;
                 }
             }
             else if((key['Right'])&&cary<20.5){
-                cary+=0.22;
+                cary+=0.15;
             }
             else if(key['Left']&&cary>0.5){
-                cary-=0.22;
+                cary-=0.15;
             }
         }
 
@@ -202,7 +202,9 @@
         function time(){
             setInterval(function(){
                 sc += 0.01;
-                score.innerText = "score : "+sc.toFixed(2);
+                sec = sc.toFixed(2).split('.')[0];
+                milsec = sc.toFixed(2).split('.')[1];
+                score.innerText = sec+':'+milsec;
             },10)
         }
         /*setInterval(function(){

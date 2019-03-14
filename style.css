@@ -39,14 +39,17 @@ score:nth-child(3){
 }
 car, enemy{
     position:absolute;
+    background-size:cover;
     display:inline-block;
     width:4vw;
     height:12vh;
-    background:red;
+}
+enemy{
+    background: red;
 }
 car{
-    background:white;
 }
+
 
 #game{
     width:40%;
@@ -56,7 +59,9 @@ car{
     margin:auto;
 }
 #player{
-    background:pink;
+    background-image: url('eiei.png');
+    background-repeat: no-repeat;
+    position:absolute;
     top:80vh;
     left:10vw;
 }
@@ -78,4 +83,22 @@ enemy:nth-child(4n){
 }
 p{
     color: white;
+    font-size:2vh;
+}
+#score{
+    color: white;
+    font-size:7vh;
+    font-family: 'digital';
+}
+p:nth-child(1){
+    position: absolute;
+    left: 41%
+}
+@font-face {
+    font-family: 'digital';
+    src: url('font/digital-7.woff2') format('woff2'),
+         url('font/digital-7.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
 }
