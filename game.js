@@ -23,10 +23,9 @@
             lock = 0
             brain = 14;
             fill = 0;
-            check = 0;
             bbreak = 0;
             carbottom = 0;
-            speed = 0;
+            lol= 0;
         }
 
         function runroad(){
@@ -37,7 +36,6 @@
             if (roadx>=110) {roadx=0;}
             }, 1);
         }
-        lol= 0;
         cbefore = -1
         c = -1
         before = -1
