@@ -8,8 +8,8 @@
             speedcarx = 0.35
             speedcary = 0.15
             speedroad = 1
-            speedenemy = 0.5
-            speedspawn = 800
+            speedenemy = 1.2
+            speedspawn = 400
             enemytop = [-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15];
             enemyleft = [1,7.25,13.5,20,1,7.25,13.5,20,1,7.25,13.5,20,1,7.25,13.5,20];
             enemystatus = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
