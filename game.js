@@ -149,7 +149,7 @@
             }
         }
 
-        setInterval(function(){
+        thebrain = setInterval(function(){
                 if(key['Space']==true && bbreak == 0){
                     lock = 0;
                     fill = 2;
@@ -294,14 +294,21 @@
             },10)
 
         function time(){
-            setInterval(function(){
+            thetime = setInterval(function(){
                 sc += 0.01;
                 sec = sc.toFixed(2).split('.')[0];
                 milsec = sc.toFixed(2).split('.')[1];
                 score.innerText = sec+':'+milsec;
             },10)
         }
+        function allstart(){
         time()
         start()
         runroad();
         game();
+        }
+        function rungame(){
+            document.querySelector('test').style.zIndex = '-100';
+            allstart();
+
+        }

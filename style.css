@@ -24,6 +24,17 @@ score{
     border: 5px solid hsl(240 40% 50%);
     font-size: 1vw;
 }
+test{
+    z-index:100;
+    top:15vh;
+    position: absolute;
+    left:calc(40% + 15vw);
+    display: block;
+    width: 15vw;
+    height:70vh;
+    background-image: linear-gradient(to bottom, red ,yellow, green);
+    border: 5px solid hsl(240 40% 50%);
+}
 score:nth-child(1){
     border-color: transparent;
 }
@@ -98,6 +109,31 @@ slow{
     height:1vw;
     background:red;
     left: 0.4vw;
+}
+gametitle,play{
+    text-align: center;
+    color: white;
+    font-family: 'digital';
+    position: absolute;
+    font-size:2vw;
+    z-index:100;
+    width: 11vw;
+    height:4vh;
+    background:black;
+    top:15vh;
+    left:1.5vw;
+    border:1px solid yellow;
+    padding:1vh;
+
+}
+play{
+    width: 6vw;
+    top:30vh;
+    left: 3.75vw;
+}
+play:hover{
+    color: red;
+    border:1px solid red;
 }
 @font-face {
     font-family: 'digital';
