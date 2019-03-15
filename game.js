@@ -2,6 +2,7 @@
         function start(){
             run.style.filter = 'grayscale(0)'
             car = window.getComputedStyle(document.querySelector('#player'));
+            slow = document.querySelector('slow');
             carx = 80;
             cary = 10;
             speedcarx = 0.35
@@ -17,6 +18,11 @@
             lane = [0,0,0,0];
             sc = 0;
             brainbreak = 0;
+            lock = 0
+            brain = 14;
+            fill = 0;
+            check = 0;
+            bbreak = 0;
         }
 
         function runroad(){
@@ -130,13 +136,17 @@
         }
 
         setInterval(function(){
-                if(key['Space']==true && brainbreak == 0){
+                if(key['Space']==true && bbreak == 0){
+                    lock = 0;
+                    fill = 2;
+                    brain -= 0.058;
+                }
 
+                if(key['Space']==true && brainbreak == 0 && brain>0 && bbreak == 0){
                     run.style.filter = 'grayscale(0.8)'
                     run.style.transition = 'filter 0.5s'
-
-                    speedcarx *= 0.5;
-                    speedcary *= 0.5;
+                    speedcarx *= 0.8;
+                    speedcary *= 0.8;
                     speedroad *= 0.5;
                     speedenemy *= 0.5;
                     slowspawn = speedspawn*2;
@@ -145,20 +155,40 @@
                     brainbreak = 1;
                     sp = setInterval(spawn, slowspawn);
                 }
-                else if(key['Space']==false && brainbreak == 1){
 
+                else if((key['Space']==false && brainbreak == 1)||(brain<=0 && brainbreak == 1)){
+                    lock = 1;
+                    bbreak = 1;
+                    if(fill >= 50){fill = 1}
                     run.style.filter = 'grayscale(0)'
                     run.style.transition = 'filter 0.5s'
 
-                    speedcarx /= 0.5;
-                    speedcary /= 0.5;
+                    speedcarx /= 0.8;
+                    speedcary /= 0.8;
                     speedroad /= 0.5;
                     speedenemy /= 0.5;
                     if(brainbreak == 1)
                         stopspawn();
                     brainbreak = 0;
                     sp = setInterval(spawn, speedspawn);
+                    lock = 1;
+                    setTimeout(function(){fill = 1},3000)
+                    slow.style.filter = 'grayscale(1)';
+                    slow.style.transition = 'filter 0.2s'
                 }
+                if(fill == 1 && brain < 14){
+                    brain += 0.058*5;
+                    bbreak = 1;
+
+                }
+                if(brain >= 14){
+                    bbreak = 0;
+                    slow.style.filter = 'grayscale(0)';
+                    slow.style.transition = 'filter 0.2s'
+                }
+
+                console.log(brain);
+                slow.style.width = brain+"vw";
             },10)
 
         function update(){
@@ -166,7 +196,7 @@
             player.style.left = cary+'vw';
             for(i=0;i<16;i++)
                 document.querySelector('enemy:nth-child('+(i+1)+')').style.top = enemytop[i]+"vh";
-            ustat = 1
+            ustat = 1;
         }
 
         setInterval(function(){
@@ -257,9 +287,6 @@
                 score.innerText = sec+':'+milsec;
             },10)
         }
-        /*setInterval(function(){
-                console.log(speedspawn);
-            },10)*/
         time()
         start()
         runroad();
