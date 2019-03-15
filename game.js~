@@ -23,7 +23,6 @@
             fill = 0;
             check = 0;
             bbreak = 0;
-            carbottom = 0;
         }
 
         function runroad(){
@@ -34,18 +33,16 @@
             if (roadx>=110) {roadx=0;}
             }, 1);
         }
-        cbefore = -1
-        c = -1
         before = -1
         x = -1
         function game(){
             sp = setInterval(spawn, speedspawn);
             var i;
             setInterval(function(){
-                carbottom++;
                 for(i=0;i<16;i++){
                     if(enemystatus[i] == 1){
                         enemytop[i] += speedenemy;
+                        document.querySelector('enemy:nth-child('+(i+1)+')').style.backgroundImage = 'url("img/car'+c+'")';
                     }
                     if(enemytop[i] >= 100){
                         enemytop[i] = -15;
@@ -55,22 +52,12 @@
             },10)
         }
 
-        function enecar(){
-            var j;
-            for(j=0;j<16;j++){
-                c = Math.floor(Math.random() * 5);
-                document.querySelector('enemy:nth-child('+(j+1)+')').style.backgroundImage = "url('img/car"+(c+1)+".png')"
-            }
-        }
-        enecar();
-        setInterval(enecar(),20);
-
         function spawn() {
-            while(before == x){
-                x = Math.floor(Math.random() * 12);
-            }
-            before = x;
-            enemystatus[x] = 1;
+            while(before == x)
+                x = Math.floor(Math.random() * 12)
+                before = x;
+                c = Math.floor(Math.random() * 5)
+                enemystatus[x] = 1;
         }
 
         function stopspawn() {
@@ -266,25 +253,25 @@
             }
                 for(i=0;i<16;i++){
                     if(i == 0 || i == 4 || i == 8 || i == 12)
-                        if(lane[0]==1&&enemytop[i]+12 > carx+1&&enemytop[i]+1 < carx+12&&enemyleft[i]+0.5<cary+4&&enemyleft[i]+4 > cary+0.5){
+                        if(lane[0]==1&&enemytop[i]+12 > carx&&enemytop[i] < carx+12&&enemyleft[i]+0.2<cary+4&&enemyleft[i]+4 > cary+0.2){
                             start();
                             alert("LOL");
                             update();
                         }
                     if(i == 1 || i == 5 || i == 9 || i == 13)
-                        if(lane[1]==1&&enemytop[i]+12 > carx+1&&enemytop[i]+1 < carx+12&&enemyleft[i]+0.5<cary+4&&enemyleft[i]+4 > cary+0.5){
+                        if(lane[1]==1&&enemytop[i]+12 > carx&&enemytop[i] < carx+12&&enemyleft[i]+0.2<cary+4&&enemyleft[i]+4 > cary+0.2){
                             start();
                             alert("LOL");
                             update();
                         }
                     if(i == 2 || i == 6 || i == 10 || i == 14)
-                        if(lane[2]==1&&enemytop[i]+12 > carx+1&&enemytop[i]+1 < carx+12&&enemyleft[i]+0.5<cary+4&&enemyleft[i]+4 > cary+0.5){
+                        if(lane[2]==1&&enemytop[i]+12 > carx&&enemytop[i] < carx+12&&enemyleft[i]+0.2<cary+4&&enemyleft[i]+4 > cary+0.2){
                             start();
                             alert("LOL");
                             update();
                         }
                     if(i == 3 || i == 7 || i == 11 || i == 15)
-                        if(lane[3]==1&&enemytop[i]+12 > carx+1&&enemytop[i]+1 < carx+12&&enemyleft[i]+0.5<cary+4&&enemyleft[i]+4 > cary+0.5){
+                        if(lane[3]==1&&enemytop[i]+12 > carx&&enemytop[i] < carx+12&&enemyleft[i]+0.2<cary+4&&enemyleft[i]+4 > cary+0.2){
                             start();
                             alert("LOL");
                             update();
