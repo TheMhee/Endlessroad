@@ -5,11 +5,11 @@
             slow = document.querySelector('slow');
             carx = 80;
             cary = 10;
-            speedcarx = 0.35
-            speedcary = 0.15
-            speedroad = 1
-            speedenemy = 1.2
-            speedspawn = 400
+            speedcarx = 0.35;
+            speedcary = 0.15;
+            speedroad = 1;
+            speedenemy = [0.5,0.75,1,1.15];
+            speedspawn = [800,650,500,400];
             enemytop = [-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15,-15];
             enemyleft = [1,7.25,13.5,20,1,7.25,13.5,20,1,7.25,13.5,20,1,7.25,13.5,20];
             enemystatus = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -24,6 +24,7 @@
             check = 0;
             bbreak = 0;
             carbottom = 0;
+            speed = 0;
         }
 
         function runroad(){
@@ -34,18 +35,19 @@
             if (roadx>=110) {roadx=0;}
             }, 1);
         }
+        lol= 0;
         cbefore = -1
         c = -1
         before = -1
         x = -1
         function game(){
-            sp = setInterval(spawn, speedspawn);
+            sp = setInterval(spawn, speedspawn[lol]);
             var i;
             theenemyrun = setInterval(function(){
                 carbottom++;
                 for(i=0;i<16;i++){
                     if(enemystatus[i] == 1){
-                        enemytop[i] += speedenemy;
+                        enemytop[i] += speedenemy[lol];
                     }
                     if(enemytop[i] >= 100){
                         enemytop[i] = -15;
@@ -162,8 +164,8 @@
                     speedcarx *= 0.8;
                     speedcary *= 0.8;
                     speedroad *= 0.5;
-                    speedenemy *= 0.5;
-                    slowspawn = speedspawn*2;
+                    speedenemy[lol] *= 0.5;
+                    slowspawn = speedspawn[lol]*2;
                     if(brainbreak == 0)
                         stopspawn();
                     brainbreak = 1;
@@ -180,11 +182,11 @@
                     speedcarx /= 0.8;
                     speedcary /= 0.8;
                     speedroad /= 0.5;
-                    speedenemy /= 0.5;
+                    speedenemy[lol] /= 0.5;
                     if(brainbreak == 1)
                         stopspawn();
                     brainbreak = 0;
-                    sp = setInterval(spawn, speedspawn);
+                    sp = setInterval(spawn, speedspawn[lol]);
                     lock = 1;
                     setTimeout(function(){fill = 1},3000)
                     slow.style.filter = 'grayscale(1)';
@@ -295,6 +297,7 @@
                 sec = sc.toFixed(2).split('.')[0];
                 milsec = sc.toFixed(2).split('.')[1];
                 score.innerText = sec+':'+milsec;
+                madness(parseInt(sec));
             },10)
         }
         function boom(i){
@@ -303,6 +306,12 @@
             player.style.backgroundImage = "url('img/boom.gif')"
             setTimeout(function(){player.style.background = "transparent"},1000)
         }
+
+        themaddness = setInterval(function(){
+            if(lol<=4)
+                lol++;
+        },1000*45)
+
         function allstart(){
         time()
         start()
@@ -310,12 +319,13 @@
         game();
         }
         function stopall(){
-            clearInterval(thetime)
-            clearInterval(thebrain)
-            clearInterval(theenemy)
-            clearInterval(theenemyrun)
-            clearInterval(theroad)
-            clearInterval(themove)
+            clearInterval(thetime);
+            clearInterval(thebrain);
+            clearInterval(theenemy);
+            clearInterval(theenemyrun);
+            clearInterval(theroad);
+            clearInterval(themove);
+            clearInterval(themaddness);
         }
         function rungame(){
             document.querySelector('test').style.zIndex = '-100';
