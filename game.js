@@ -28,7 +28,7 @@
 
         function runroad(){
         var roadx = 0;
-        setInterval(function(){
+        theroad = setInterval(function(){
             roadx+=speedroad;
             run.style.backgroundPosition = '0px '+roadx+'vh';
             if (roadx>=110) {roadx=0;}
@@ -41,7 +41,7 @@
         function game(){
             sp = setInterval(spawn, speedspawn);
             var i;
-            setInterval(function(){
+            theenemyrun = setInterval(function(){
                 carbottom++;
                 for(i=0;i<16;i++){
                     if(enemystatus[i] == 1){
@@ -63,7 +63,7 @@
             }
         }
         enecar();
-        setInterval(enecar(),20);
+        theenemy = setInterval(enecar(),20);
 
         function spawn() {
             while(before == x){
@@ -213,7 +213,7 @@
             ustat = 1;
         }
 
-        setInterval(function(){
+        themove = setInterval(function(){
             move();
             update();
             if(ustat == 1){
@@ -267,27 +267,23 @@
                 for(i=0;i<16;i++){
                     if(i == 0 || i == 4 || i == 8 || i == 12)
                         if(lane[0]==1&&enemytop[i]+12 > carx+1&&enemytop[i]+1 < carx+12&&enemyleft[i]+0.5<cary+4&&enemyleft[i]+4 > cary+0.5){
-                            start();
-                            alert("LOL");
-                            update();
+                            stopall()
+                            boom(i)
                         }
                     if(i == 1 || i == 5 || i == 9 || i == 13)
                         if(lane[1]==1&&enemytop[i]+12 > carx+1&&enemytop[i]+1 < carx+12&&enemyleft[i]+0.5<cary+4&&enemyleft[i]+4 > cary+0.5){
-                            start();
-                            alert("LOL");
-                            update();
+                            stopall()
+                            boom(i)
                         }
                     if(i == 2 || i == 6 || i == 10 || i == 14)
                         if(lane[2]==1&&enemytop[i]+12 > carx+1&&enemytop[i]+1 < carx+12&&enemyleft[i]+0.5<cary+4&&enemyleft[i]+4 > cary+0.5){
-                            start();
-                            alert("LOL");
-                            update();
+                            stopall()
+                            boom(i)
                         }
                     if(i == 3 || i == 7 || i == 11 || i == 15)
                         if(lane[3]==1&&enemytop[i]+12 > carx+1&&enemytop[i]+1 < carx+12&&enemyleft[i]+0.5<cary+4&&enemyleft[i]+4 > cary+0.5){
-                            start();
-                            alert("LOL");
-                            update();
+                            stopall()
+                            boom(i)
                         }
 
                 }
@@ -301,11 +297,25 @@
                 score.innerText = sec+':'+milsec;
             },10)
         }
+        function boom(i){
+            document.querySelector('enemy:nth-child('+(i+1)+')').style.backgroundImage = "url('img/boom.gif')"
+            setTimeout(function(){document.querySelector('enemy:nth-child('+(i+1)+')').style.background = "transparent"},1000)
+            player.style.backgroundImage = "url('img/boom.gif')"
+            setTimeout(function(){player.style.background = "transparent"},1000)
+        }
         function allstart(){
         time()
         start()
         runroad();
         game();
+        }
+        function stopall(){
+            clearInterval(thetime)
+            clearInterval(thebrain)
+            clearInterval(theenemy)
+            clearInterval(theenemyrun)
+            clearInterval(theroad)
+            clearInterval(themove)
         }
         function rungame(){
             document.querySelector('test').style.zIndex = '-100';
