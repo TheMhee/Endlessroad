@@ -1,6 +1,8 @@
 
         function start(){
+            thespeed = 0;
             run.style.filter = 'grayscale(0)'
+            resetcar = "position:absolute; background-repeat: no-repeat; background-size: contain; display:inline-block; width:4vw; height:12vh;"
             car = window.getComputedStyle(document.querySelector('#player'));
             slow = document.querySelector('slow');
             carx = 80;
@@ -64,8 +66,10 @@
                 document.querySelector('enemy:nth-child('+(j+1)+')').style.backgroundImage = "url('img/car"+(c+1)+".png')"
             }
         }
-        enecar();
-        theenemy = setInterval(enecar(),20);
+        function theenemycar(){
+            enecar();
+            theenemy = setInterval(enecar(),20);
+        }
 
         function spawn() {
             while(before == x){
@@ -117,6 +121,10 @@
             else if(a == 'Space'){
                 key['Space'] = true;
             }
+            console.log(enemystatus)
+            console.log(enemytop)
+            console.log(carx)
+            console.log(cary)
 
         }
         //เช็ค Inputการเครื่องไหวตลอดเวลา พร้อมอัพเดท
@@ -150,7 +158,7 @@
                 cary-=speedcary;
             }
         }
-
+        function thebrainactive(){
         thebrain = setInterval(function(){
                 if(key['Space']==true && bbreak == 0){
                     lock = 0;
@@ -206,6 +214,7 @@
                 console.log(brain);
                 slow.style.width = brain+"vw";
             },10)
+        }
 
         function update(){
             player.style.top = carx+'vh';
@@ -214,7 +223,7 @@
                 document.querySelector('enemy:nth-child('+(i+1)+')').style.top = enemytop[i]+"vh";
             ustat = 1;
         }
-
+        function themoveactive(){
         themove = setInterval(function(){
             move();
             update();
@@ -290,6 +299,7 @@
 
                 }
             },10)
+        }
 
         function time(){
             thetime = setInterval(function(){
@@ -297,7 +307,6 @@
                 sec = sc.toFixed(2).split('.')[0];
                 milsec = sc.toFixed(2).split('.')[1];
                 score.innerText = sec+':'+milsec;
-                madness(parseInt(sec));
             },10)
         }
         function boom(i){
@@ -307,16 +316,56 @@
             setTimeout(function(){player.style.background = "transparent"},1000)
         }
 
-        themaddness = setInterval(function(){
-            if(lol<=4)
-                lol++;
-        },1000*45)
+        function madness(){
+            themaddness = setInterval(function(){
+                if(lol<2){
+                    lol+=1;
+                    speedtext()
+                }
+                else if(lol=2){
+                    thespeed = setTimeout(function(){
+                        lol+=1;
+                        speedtext()
+                    },1065*60)
+                    setTimeout(function(){
+                        clearTimeout(thespeed);
+                    },1065*60.2)
+                }
 
+            },1065*30)
+
+        }
+        function speedtext(){
+            inspd.style.left = "35vw";
+                inspd.style.transition = "left .25s";
+                setTimeout(function(){
+                    inspd.style.left = "100vw";
+                    setTimeout(function(){
+                        inspd.style.left = "-15vw";
+                        inspd.style.transition = "left .0s";
+                    },1200);
+                },1000);
+        }
+        function over(){
+            setTimeout(function(){
+                gameover.style.zIndex = '1000';
+                gameover.style.width = '20vw';
+                gameover.style.transition = 'width 0.75s';
+                gamescore.innerText = sec+':'+milsec;
+            },1000)
+        }
         function allstart(){
-        time()
-        start()
-        runroad();
-        game();
+            time()
+            start()
+            runroad();
+            game();
+            madness();
+            update();
+        }
+        function allInterval(){
+            theenemycar();
+            themoveactive();
+            thebrainactive();
         }
         function stopall(){
             clearInterval(thetime);
@@ -326,9 +375,16 @@
             clearInterval(theroad);
             clearInterval(themove);
             clearInterval(themaddness);
+            clearInterval(sp);
+            clearTimeout(thespeed);
+            over();
         }
         function rungame(){
-            document.querySelector('test').style.zIndex = '-100';
             allstart();
+            allInterval();
+            player.style = resetcar;
+            gameover.style.zIndex = '-1000';
+            gameover.style.width = '0vw';
+            document.querySelector('test').style.zIndex = '-100';
 
         }
