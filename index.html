@@ -27,12 +27,12 @@
         <left>
             <score>
             </score>
-            <score id='scoreboard'>
+            <score1 id='scoreboard'>
                 <h2 id='time'>Time<h2>
                 <h1 id='score'></h1>
                 <h2 id='br'>Brain</h2>
                 <slow></slow>
-            </score>
+            </score1>
             <score>
             </score>
             <h2 id='Dura'>Direction</h2>
@@ -48,10 +48,16 @@
         <p id='inspd'>increase speed</p>
         <div id='gameover'>
             <h1 id='gametext1'>time</h1>
-            <h1 id='gamescore'>2.255</h1>
+            <h1 id='gamescore'></h1>
             <h1 id='gametext2' onclick='rungame()' >Play again</h1>
         </div>
     </div>
+<audio id="bgm" preload="auto" loop>
+<source src="sound/bgm.mp3" type="audio/ogg">
+</audio>
+<audio id="boom" preload="auto">
+<source src="sound/ex.wav" type="audio/ogg">
+</audio>
 <script type="text/javascript" src="game.js"></script>
 </body>
 </html>

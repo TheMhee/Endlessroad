@@ -21,7 +21,7 @@ road{
     float: left;
 
 }
-score{
+score, score1{
     position: fixed;
     left:calc(40% + 15vw);
     display: block;
@@ -46,7 +46,7 @@ test{
 score:nth-child(1){
     border-color: transparent;
 }
-score:nth-child(2){
+score1{
     top:15vh;
     height:70vh;
     background: hsl(240 100% 20%);
@@ -59,7 +59,7 @@ score:nth-child(3){
 car, enemy{
     position:absolute;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size:contain;
     display:inline-block;
     width:4vw;
     height:12vh;
@@ -76,9 +76,6 @@ car, enemy{
 }
 #player{
     background-image: url('img/eiei.png');
-    background-repeat: no-repeat;
-    filter: grayscale(20%);
-    position:absolute;
     top:80vh;
     left:10vw;
 }
@@ -103,10 +100,12 @@ p{
     font-size:2vh;
 }
 #score{
-    margin: 8vh;
     color: white;
     font-size:7vh;
     font-family: 'digital';
+    position: absolute;
+    left:4.75vw;
+    top:4vh;
 
 }
 p:nth-child(1){
@@ -120,6 +119,7 @@ slow{
     height:1vw;
     background:red;
     left: 0.4vw;
+    top:22vh;
 }
 gametitle,play{
     text-align: center;
@@ -152,7 +152,7 @@ p#inspd{
     font-size: 5vh;
     position: fixed;
     top:30vh;
-    left: -15vw;
+    left: -100vw;
 }
 #gameover{
     border:0.5vh solid blue;
