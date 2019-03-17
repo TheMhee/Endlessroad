@@ -103,8 +103,9 @@ p{
     color: white;
     font-size:7vh;
     font-family: 'digital';
-    position: absolute;
-    left:4.75vw;
+    text-align: center;
+    position: relative;
+    left: 0.1vw;
     top:4vh;
 
 }
