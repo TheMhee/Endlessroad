@@ -36,6 +36,8 @@
             brain = 14;
             fill = 0;
             bbreak = 0;
+            //ความเร็วของเสียง
+            soundspeed = 1;
         }
 
         // การเคลื่อนที่ของถนน
@@ -338,6 +340,7 @@
                 if(lol<2){
                     lol+=1;
                     speedtext()
+                    addspeed('bgm')
                 }
                 else if(lol=2){
                     thespeed = setTimeout(function(){
@@ -349,7 +352,7 @@
                     },1065*60.2)
                 }
 
-            },1000*35)
+            },1000*5)
 
         }
         //text แสดงเมื่อเพื่มความเร็วจะวิ่งเมื่อถึงเวลา
@@ -383,6 +386,11 @@
             var audio = document.getElementById(id)
             audio.pause();
             audio.currentTime = 0;
+        }
+        function addspeed(id){
+            var audio = document.getElementById(id)
+            soundspeed *= 1.1;
+            audio.playbackRate = soundspeed;
         }
         //สั่งฟังก์ชั่นทุกส่วนให้ทำงาน
         function allstart(){
