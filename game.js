@@ -176,6 +176,8 @@
         thebrain = setInterval(function(){
                 //ได้รับ key:space และยังไม่มีการเปิดใช้งานให้ เกจวิ่งลดลง
                 if(key['Space']==true && bbreak == 0){
+                    lock = 0;
+                    fill = 2;
                     brain -= 0.058;
                 }
                 //แล้ว สั่งเกมทั้งหมดเคลื่อนไหวช้าลง
